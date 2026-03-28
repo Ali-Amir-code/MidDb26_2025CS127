@@ -98,7 +98,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\AdvisorBL.cs" />
+    <Compile Include="BL\ProjectBL.cs" />
     <Compile Include="BL\StudentBL.cs" />
+    <Compile Include="DAL\AdvisorDAL.cs" />
+    <Compile Include="DAL\ProjectDAL.cs" />
     <Compile Include="DAL\StudentDAL.cs" />
     <Compile Include="Models\Advisor.cs" />
     <Compile Include="Models\Evaluation.cs" />
