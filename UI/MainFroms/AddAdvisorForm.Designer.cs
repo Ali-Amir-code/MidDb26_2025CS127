@@ -57,7 +57,6 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.designationComboBox);
             this.mainPanel.Controls.Add(this.salaryTextBox);
             this.mainPanel.Controls.Add(this.salaryLabel);
             this.mainPanel.Controls.Add(this.designationComboBox);
@@ -105,17 +104,7 @@
             this.salaryLabel.TabIndex = 58;
             this.salaryLabel.Text = "SALARY:";
             // 
-            // designationComboBox
-            // 
-            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.designationComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.designationComboBox.FormattingEnabled = true;
-            this.designationComboBox.Location = new System.Drawing.Point(168, 189);
-            this.designationComboBox.MaxDropDownItems = 12;
-            this.designationComboBox.Name = "designationComboBox";
-            this.designationComboBox.Size = new System.Drawing.Size(225, 26);
-            this.designationComboBox.TabIndex = 57;
+            // (designationComboBox initialization moved later to include items)
             // 
             // designationLabel
             // 
@@ -365,6 +354,5 @@
         private System.Windows.Forms.Label salaryLabel;
         private System.Windows.Forms.ComboBox designationComboBox;
         private System.Windows.Forms.Label designationLabel;
-        private System.Windows.Forms.ComboBox designationComboBox;
     }
 }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.subtitleLabel = new System.Windows.Forms.Label();
             this.breadcrumbLabel = new System.Windows.Forms.Label();
@@ -57,10 +57,10 @@
             this.deleteAdvisorBtn = new System.Windows.Forms.Button();
             this.addAdvisorBtn = new System.Windows.Forms.Button();
             this.formPanel = new System.Windows.Forms.Panel();
+            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
-            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.selectBtn = new System.Windows.Forms.Button();
@@ -77,7 +77,6 @@
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.saperator = new System.Windows.Forms.Panel();
             this.formLabel = new System.Windows.Forms.Label();
-            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.headerPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.gridContainer.SuspendLayout();
@@ -175,20 +174,20 @@
             // 
             this.advisorListGrid.AllowUserToAddRows = false;
             this.advisorListGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            this.advisorListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            this.advisorListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.advisorListGrid.BackgroundColor = System.Drawing.Color.White;
             this.advisorListGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.advisorListGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.advisorListGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.advisorListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.advisorListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.advisorListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advisorListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn,
@@ -203,15 +202,15 @@
             this.groupColumn,
             this.deleteColumn,
             this.editColumn});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.advisorListGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.advisorListGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.advisorListGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advisorListGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
             this.advisorListGrid.Location = new System.Drawing.Point(3, 3);
@@ -386,7 +385,6 @@
             // formPanel
             // 
             this.formPanel.BackColor = System.Drawing.Color.Transparent;
-            this.formPanel.Controls.Add(this.designationComboBox);
             this.formPanel.Controls.Add(this.dateTimePicker1);
             this.formPanel.Controls.Add(this.salaryTextBox);
             this.formPanel.Controls.Add(this.salaryLabel);
@@ -413,10 +411,30 @@
             this.formPanel.Size = new System.Drawing.Size(245, 479);
             this.formPanel.TabIndex = 1;
             // 
+            // designationComboBox
+            // 
+            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.designationComboBox.FormattingEnabled = true;
+            this.designationComboBox.Items.AddRange(new object[] {
+            " All",
+            "Professor",
+            "Associate Professor",
+            "Assistant Professor",
+            "Lecturer",
+            "Industry Professional"});
+            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
+            this.designationComboBox.MaxDropDownItems = 12;
+            this.designationComboBox.Name = "designationComboBox";
+            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
+            this.designationComboBox.TabIndex = 23;
+            // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Checked = false;
             this.dateTimePicker1.Location = new System.Drawing.Point(14, 331);
             this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowCheckBox = true;
             this.dateTimePicker1.Size = new System.Drawing.Size(222, 22);
             this.dateTimePicker1.TabIndex = 22;
             // 
@@ -438,17 +456,6 @@
             this.salaryLabel.Size = new System.Drawing.Size(56, 17);
             this.salaryLabel.TabIndex = 20;
             this.salaryLabel.Text = "SALARY";
-            // 
-            // designationComboBox
-            // 
-            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.designationComboBox.FormattingEnabled = true;
-            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
-            this.designationComboBox.MaxDropDownItems = 12;
-            this.designationComboBox.Name = "designationComboBox";
-            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
-            this.designationComboBox.TabIndex = 19;
             // 
             // designationLabel
             // 
@@ -615,24 +622,6 @@
             this.formLabel.TabIndex = 0;
             this.formLabel.Text = "Select Advisor";
             // 
-            // designationComboBox
-            // 
-            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.designationComboBox.FormattingEnabled = true;
-            this.designationComboBox.Items.AddRange(new object[] {
-            " All",
-            "Professor",
-            "Associate Professor",
-            "Assistant Professor",
-            "Lecturer",
-            "Industry Professional"});
-            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
-            this.designationComboBox.MaxDropDownItems = 12;
-            this.designationComboBox.Name = "designationComboBox";
-            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
-            this.designationComboBox.TabIndex = 23;
-            // 
             // AdvisoryControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -687,7 +676,7 @@
         private System.Windows.Forms.DataGridView advisorListGrid;
         private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label salaryLabel;
-        private System.Windows.Forms.ComboBox designationComboBox;
+
         private System.Windows.Forms.Label designationLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;

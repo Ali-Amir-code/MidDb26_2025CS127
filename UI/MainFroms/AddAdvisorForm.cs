@@ -36,7 +36,7 @@ namespace MidDb26_2025CS127.UI.Froms
             contactTextBox.Text = advisor.Contact ?? string.Empty;
             emailTextBox.Text = advisor.Email;
             salaryTextBox.Text = advisor.Salary.HasValue ? advisor.Salary.Value.ToString("0.##") : string.Empty;
-            textBox2.Text = !string.IsNullOrWhiteSpace(advisor.DesignationLabel)
+            designationComboBox.Text = !string.IsNullOrWhiteSpace(advisor.DesignationLabel)
                 ? advisor.DesignationLabel
                 : ResolveDesignationText(advisor.Designation);
 
@@ -101,8 +101,6 @@ namespace MidDb26_2025CS127.UI.Froms
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
             designationComboBox.SelectedIndex = -1;
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
             salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
@@ -119,12 +117,28 @@ namespace MidDb26_2025CS127.UI.Froms
         {
             decimal parsedSalary;
             int parsedDesignation;
-            var designationText = textBox2.Text.Trim();
 
-            if (!int.TryParse(designationText, out parsedDesignation))
+            // try to get selected designation from combo box selected item first
+            var selectedDesignation = designationComboBox.SelectedItem as Lookup;
+
+            // if not selected, try to resolve from the text
+            if (selectedDesignation == null)
             {
-                var match = designationLookups.FirstOrDefault(d => d.Value.Equals(designationText, StringComparison.OrdinalIgnoreCase));
-                parsedDesignation = match != null ? match.Id : -1;
+                var designationText = (designationComboBox.Text ?? string.Empty).Trim();
+                if (!int.TryParse(designationText, out parsedDesignation))
+                {
+                    var match = designationLookups.FirstOrDefault(d => d.Value.Equals(designationText, StringComparison.OrdinalIgnoreCase));
+                    parsedDesignation = match != null ? match.Id : -1;
+                }
+                else
+                {
+                    parsedDesignation = parsedDesignation; // parsed by TryParse
+                }
+
+                if (selectedDesignation == null && parsedDesignation > -1)
+                {
+                    selectedDesignation = designationLookups.FirstOrDefault(d => d.Id == parsedDesignation);
+                }
             }
 
             return new Advisor
@@ -137,8 +151,8 @@ namespace MidDb26_2025CS127.UI.Froms
                 DateOfBirth = dateTimePicker1.Checked ? (DateTime?)dateTimePicker1.Value.Date : null,
                 Gender = genderComboBox.SelectedIndex,
                 Designation = selectedDesignation != null ? selectedDesignation.Id : -1,
-                DesignationLabel = selectedDesignation != null ? selectedDesignation.Value : string.Empty,
-                Salary = decimal.TryParse(textBox1.Text.Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
+                DesignationLabel = selectedDesignation != null ? selectedDesignation.Value : (designationComboBox.Text ?? string.Empty),
+                Salary = decimal.TryParse((salaryTextBox.Text ?? string.Empty).Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
             };
         }
 

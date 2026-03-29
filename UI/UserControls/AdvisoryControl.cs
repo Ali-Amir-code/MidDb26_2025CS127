@@ -74,7 +74,7 @@ namespace MidDb26_2025CS127.UI.UserControls
         {
             string firstName = firstNameTextBox.Text.Trim();
             string lastName = lastNameTextBox.Text.Trim();
-            string designation = textBox2.Text.Trim();
+            string designation = (designationComboBox.Text ?? string.Empty).Trim();
             string salary = salaryTextBox.Text.Trim();
             string contact = contactTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();
@@ -122,7 +122,7 @@ namespace MidDb26_2025CS127.UI.UserControls
         {
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
-            textBox2.Text = string.Empty;
+            designationComboBox.SelectedIndex = -1;
             salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
