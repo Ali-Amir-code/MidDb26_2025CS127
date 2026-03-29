@@ -68,24 +68,40 @@ namespace MidDb26_2025CS127.UI.Froms
             dateTimePicker1.Checked = false;
             addBtn.Click += addBtn_Click;
             clearBtn.Click += clearBtn_Click;
-            LoadDesignationHints();
+            LoadDesignationOptions();
         }
 
-        private void LoadDesignationHints()
+        private void LoadDesignationOptions()
         {
             designationLookups = AdvisorBL.GetDesignationLookups() ?? new List<Lookup>();
-            var autoCollection = new AutoCompleteStringCollection();
-            autoCollection.AddRange(designationLookups.Select(d => d.Value).ToArray());
 
-            textBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            textBox2.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            textBox2.AutoCompleteCustomSource = autoCollection;
+            designationComboBox.Items.Clear();
+            designationComboBox.DisplayMember = "Value";
+            designationComboBox.ValueMember = "Id";
+            designationComboBox.DataSource = designationLookups;
+            designationComboBox.SelectedIndex = -1;
+        }
+
+        private void SelectDesignation(int designationId)
+        {
+            for (int i = 0; i < designationComboBox.Items.Count; i++)
+            {
+                var item = designationComboBox.Items[i] as Lookup;
+                if (item != null && item.Id == designationId)
+                {
+                    designationComboBox.SelectedIndex = i;
+                    return;
+                }
+            }
+            designationComboBox.SelectedIndex = -1;
         }
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
+            designationComboBox.SelectedIndex = -1;
+            textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
             salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
@@ -120,9 +136,9 @@ namespace MidDb26_2025CS127.UI.Froms
                 Email = emailTextBox.Text,
                 DateOfBirth = dateTimePicker1.Checked ? (DateTime?)dateTimePicker1.Value.Date : null,
                 Gender = genderComboBox.SelectedIndex,
-                Designation = parsedDesignation,
-                DesignationLabel = designationText,
-                Salary = decimal.TryParse(salaryTextBox.Text.Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
+                Designation = selectedDesignation != null ? selectedDesignation.Id : -1,
+                DesignationLabel = selectedDesignation != null ? selectedDesignation.Value : string.Empty,
+                Salary = decimal.TryParse(textBox1.Text.Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
             };
         }
 

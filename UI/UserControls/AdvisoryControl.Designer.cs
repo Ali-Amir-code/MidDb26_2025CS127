@@ -60,6 +60,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
+            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.selectBtn = new System.Windows.Forms.Button();
@@ -389,6 +390,7 @@
             this.formPanel.Controls.Add(this.dateTimePicker1);
             this.formPanel.Controls.Add(this.salaryTextBox);
             this.formPanel.Controls.Add(this.salaryLabel);
+            this.formPanel.Controls.Add(this.designationComboBox);
             this.formPanel.Controls.Add(this.designationLabel);
             this.formPanel.Controls.Add(this.clearBtn);
             this.formPanel.Controls.Add(this.selectBtn);
@@ -436,6 +438,17 @@
             this.salaryLabel.Size = new System.Drawing.Size(56, 17);
             this.salaryLabel.TabIndex = 20;
             this.salaryLabel.Text = "SALARY";
+            // 
+            // designationComboBox
+            // 
+            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.designationComboBox.FormattingEnabled = true;
+            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
+            this.designationComboBox.MaxDropDownItems = 12;
+            this.designationComboBox.Name = "designationComboBox";
+            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
+            this.designationComboBox.TabIndex = 19;
             // 
             // designationLabel
             // 
@@ -674,6 +687,7 @@
         private System.Windows.Forms.DataGridView advisorListGrid;
         private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label salaryLabel;
+        private System.Windows.Forms.ComboBox designationComboBox;
         private System.Windows.Forms.Label designationLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
