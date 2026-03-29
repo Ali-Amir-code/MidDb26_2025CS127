@@ -53,7 +53,7 @@ namespace MidDb26_2025CS127.UI.UserControls
 
             foreach (var item in projects)
             {
-                int index = projectListGrid.Rows.Add(item.Title, item.AssignedGroupCount > 0 ? item.AssignedGroupCount.ToString() : string.Empty, item.Description);
+                int index = projectListGrid.Rows.Add(item.Title, item.AssignedGroupCount > 0 ? item.AssignedGroupName : string.Empty, item.Description);
                 projectListGrid.Rows[index].Cells[HiddenIdColumnName].Value = item.Id;
             }
         }

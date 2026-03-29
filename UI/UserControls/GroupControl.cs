@@ -25,6 +25,7 @@ namespace MidDb26_2025CS127.UI.UserControls
             deleteGroupBtn.Click += deleteGroupBtn_Click;
             groupGrid.SelectionChanged += groupGrid_SelectionChanged;
             sortComboBox.SelectedIndexChanged += sortComboBox_SelectedIndexChanged;
+            editGroupBtn.Click += editGroupBtn_Click;
 
             RefreshData();
         }
@@ -144,6 +145,23 @@ namespace MidDb26_2025CS127.UI.UserControls
         private void groupGrid_SelectionChanged(object sender, EventArgs e)
         {
             LoadGroupDetail(GetSelectedGroup());
+        }
+
+
+        private void editGroupBtn_Click(object sender, EventArgs e)
+        {
+            var selected = GetSelectedGroup();
+            if (selected == null)
+            {
+                MessageBox.Show("Select a group to edit.", "Edit Group", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            using (var form = new AddGroupForm(selected, "Edit Group", "Update"))
+            {
+                form.groupSaved += Form_groupSaved;
+                form.ShowDialog();
+            }
         }
 
         private void sortComboBox_SelectedIndexChanged(object sender, EventArgs e)

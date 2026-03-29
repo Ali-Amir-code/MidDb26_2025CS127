@@ -10,7 +10,12 @@ namespace MidDb26_2025CS127.DAL
         public static List<Project> GetAllProjects()
         {
             var projects = new List<Project>();
-            const string query = "SELECT Id, Title, Description FROM project;";
+            const string query = @"SELECT p.Id, p.Title, p.Description,
+                                          gp.GroupId,
+                                          CONCAT('Group ', gp.GroupId) AS GroupName
+                                   FROM project AS p
+                                   LEFT JOIN groupproject AS gp ON gp.ProjectId = p.Id
+                                   ORDER BY p.Title;";
 
             using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
             {
@@ -20,7 +25,9 @@ namespace MidDb26_2025CS127.DAL
                     {
                         Id = Convert.ToInt32(reader["Id"]),
                         Title = Convert.ToString(reader["Title"]),
-                        Description = Convert.ToString(reader["Description"])
+                        Description = Convert.ToString(reader["Description"]),
+                        AssignedGroupCount = reader["GroupId"] == DBNull.Value ? 0 : 1,
+                        AssignedGroupName = Convert.ToString(reader["GroupName"])
                     });
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using MidDb26_2025CS127.Models;
 using MidDb26_2025CS127.Utilities;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,12 +74,23 @@ namespace MidDb26_2025CS127.DAL
             return groupsById.Values.ToList();
         }
 
-        public static List<Project> GetProjectsForAssignment()
+        public static List<Project> GetProjectsForAssignment(int? currentGroupId)
         {
             var projects = new List<Project>();
-            const string query = "SELECT Id, Title FROM project ORDER BY Title;";
+            const string query = @"SELECT p.Id, p.Title
+                                   FROM project AS p
+                                   WHERE NOT EXISTS (
+                                       SELECT 1
+                                       FROM groupproject AS gp
+                                       WHERE gp.ProjectId = p.Id
+                                         AND (@currentGroupId IS NULL OR gp.GroupId <> @currentGroupId)
+                                   )
+                                   ORDER BY p.Title;";
 
-            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
+            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>
+            {
+                { "@currentGroupId", currentGroupId.HasValue ? (object)currentGroupId.Value : DBNull.Value }
+            }))
             {
                 while (reader.Read())
                 {
@@ -93,17 +105,24 @@ namespace MidDb26_2025CS127.DAL
             return projects;
         }
 
-        public static List<Student> GetUnassignedStudents()
+        public static List<Student> GetAvailableStudentsForGroup(int? currentGroupId)
         {
             var students = new List<Student>();
             const string query = @"SELECT s.Id, s.RegistrationNo, p.FirstName, p.LastName
                                    FROM student AS s
                                    JOIN person AS p ON p.Id = s.Id
-                                   LEFT JOIN groupstudent AS gs ON gs.StudentId = s.Id
-                                   WHERE gs.StudentId IS NULL
+                                   WHERE NOT EXISTS (
+                                       SELECT 1
+                                       FROM groupstudent AS gs
+                                       WHERE gs.StudentId = s.Id
+                                         AND (@currentGroupId IS NULL OR gs.GroupId <> @currentGroupId)
+                                   )
                                    ORDER BY s.RegistrationNo;";
 
-            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
+            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>
+            {
+                { "@currentGroupId", currentGroupId.HasValue ? (object)currentGroupId.Value : DBNull.Value }
+            }))
             {
                 while (reader.Read())
                 {
@@ -141,39 +160,30 @@ namespace MidDb26_2025CS127.DAL
                             groupId = groupCommand.LastInsertedId;
                         }
 
-                        if (group.ProjectId.HasValue)
-                        {
-                            using (var projectCommand = DatabaseHelper.CreateCommand(connection,
-                                "INSERT INTO groupproject (ProjectId, GroupId, AssignmentDate) VALUES (@projectId, @groupId, @date);",
-                                new Dictionary<string, object>
-                                {
-                                    { "@projectId", group.ProjectId.Value },
-                                    { "@groupId", groupId },
-                                    { "@date", DateTime.Now }
-                                }, transaction))
-                            {
-                                projectCommand.ExecuteNonQuery();
-                            }
-                        }
+                        UpsertGroupRelations(connection, transaction, (int)groupId, group.ProjectId, group.Members);
 
-                        int activeStatus = GetActiveStudentStatusId(connection, transaction);
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
 
-                        foreach (var student in group.Members)
-                        {
-                            using (var memberCommand = DatabaseHelper.CreateCommand(connection,
-                                "INSERT INTO groupstudent (GroupId, StudentId, Status, AssignmentDate) VALUES (@groupId, @studentId, @status, @date);",
-                                new Dictionary<string, object>
-                                {
-                                    { "@groupId", groupId },
-                                    { "@studentId", student.Id },
-                                    { "@status", activeStatus },
-                                    { "@date", DateTime.Now }
-                                }, transaction))
-                            {
-                                memberCommand.ExecuteNonQuery();
-                            }
-                        }
-
+        public static bool UpdateGroup(Group group)
+        {
+            using (var connection = DatabaseHelper.GetConnection())
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        UpsertGroupRelations(connection, transaction, group.Id, group.ProjectId, group.Members);
                         transaction.Commit();
                         return true;
                     }
@@ -212,8 +222,46 @@ namespace MidDb26_2025CS127.DAL
             }
         }
 
+        private static void UpsertGroupRelations(MySqlConnection connection, MySqlTransaction transaction, int groupId, int? projectId, List<Student> members)
+        {
+            ExecuteDelete(connection, transaction, "DELETE FROM groupproject WHERE GroupId = @groupId;", groupId);
 
-        private static int GetActiveStudentStatusId(MySql.Data.MySqlClient.MySqlConnection connection, MySql.Data.MySqlClient.MySqlTransaction transaction)
+            if (projectId.HasValue && projectId.Value > 0)
+            {
+                using (var projectCommand = DatabaseHelper.CreateCommand(connection,
+                    "INSERT INTO groupproject (ProjectId, GroupId, AssignmentDate) VALUES (@projectId, @groupId, @date);",
+                    new Dictionary<string, object>
+                    {
+                        { "@projectId", projectId.Value },
+                        { "@groupId", groupId },
+                        { "@date", DateTime.Now }
+                    }, transaction))
+                {
+                    projectCommand.ExecuteNonQuery();
+                }
+            }
+
+            ExecuteDelete(connection, transaction, "DELETE FROM groupstudent WHERE GroupId = @groupId;", groupId);
+            int activeStatus = GetActiveStudentStatusId(connection, transaction);
+
+            foreach (var student in members ?? new List<Student>())
+            {
+                using (var memberCommand = DatabaseHelper.CreateCommand(connection,
+                    "INSERT INTO groupstudent (GroupId, StudentId, Status, AssignmentDate) VALUES (@groupId, @studentId, @status, @date);",
+                    new Dictionary<string, object>
+                    {
+                        { "@groupId", groupId },
+                        { "@studentId", student.Id },
+                        { "@status", activeStatus },
+                        { "@date", DateTime.Now }
+                    }, transaction))
+                {
+                    memberCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static int GetActiveStudentStatusId(MySqlConnection connection, MySqlTransaction transaction)
         {
             const string query = @"SELECT Id
                                    FROM lookup
@@ -233,7 +281,7 @@ namespace MidDb26_2025CS127.DAL
             return 3;
         }
 
-        private static void ExecuteDelete(MySql.Data.MySqlClient.MySqlConnection connection, MySql.Data.MySqlClient.MySqlTransaction transaction, string query, int groupId)
+        private static void ExecuteDelete(MySqlConnection connection, MySqlTransaction transaction, string query, int groupId)
         {
             using (var command = DatabaseHelper.CreateCommand(connection, query, new Dictionary<string, object> { { "@groupId", groupId } }, transaction))
             {

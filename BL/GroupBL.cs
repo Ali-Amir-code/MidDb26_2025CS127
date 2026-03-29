@@ -13,17 +13,17 @@ namespace MidDb26_2025CS127.BL
             return GroupDAL.GetAllGroups();
         }
 
-        public static List<Project> GetProjectsForAssignment()
+        public static List<Project> GetProjectsForAssignment(int? currentGroupId)
         {
-            return GroupDAL.GetProjectsForAssignment();
+            return GroupDAL.GetProjectsForAssignment(currentGroupId);
         }
 
-        public static List<Student> GetUnassignedStudents()
+        public static List<Student> GetAvailableStudentsForGroup(int? currentGroupId)
         {
-            return GroupDAL.GetUnassignedStudents();
+            return GroupDAL.GetAvailableStudentsForGroup(currentGroupId);
         }
 
-        public static bool SaveGroup(Group group, out string errorMessage)
+        public static bool SaveGroup(Group group, bool isUpdate, out string errorMessage)
         {
             errorMessage = ValidateGroup(group);
             if (!string.IsNullOrEmpty(errorMessage))
@@ -31,7 +31,7 @@ namespace MidDb26_2025CS127.BL
                 return false;
             }
 
-            return GroupDAL.AddGroup(group);
+            return isUpdate ? GroupDAL.UpdateGroup(group) : GroupDAL.AddGroup(group);
         }
 
         public static bool DeleteGroup(int groupId)
@@ -62,11 +62,6 @@ namespace MidDb26_2025CS127.BL
 
         private static string ValidateGroup(Group group)
         {
-            if (!group.ProjectId.HasValue || group.ProjectId.Value <= 0)
-            {
-                return "Please select a project.";
-            }
-
             if (group.Members == null || group.Members.Count == 0)
             {
                 return "Please select at least one student.";

@@ -12,6 +12,7 @@ namespace MidDb26_2025CS127.Models
         public string Description { get; set; }
         public string Title { get; set; }
         public int AssignedGroupCount { get; set; }
+        public string AssignedGroupName { get; set; }
 
         public Project() { }
 

@@ -13,14 +13,38 @@ namespace MidDb26_2025CS127.UI.Froms
     {
         public event EventHandler groupSaved;
 
-        private readonly List<Student> unassignedStudents = new List<Student>();
+        private readonly List<Student> availableStudents = new List<Student>();
         private readonly List<Student> selectedStudents = new List<Student>();
         private readonly List<Project> projects = new List<Project>();
 
+        private FormMode currentMode = FormMode.Add;
+        private int editingGroupId = -1;
+        private DateTime editingCreatedOn = DateTime.Now;
+
         public AddGroupForm()
         {
+            currentMode = FormMode.Add;
             InitializeComponent();
             SetupForm();
+        }
+
+        public AddGroupForm(Group group, string title, string actionButtonText)
+        {
+            currentMode = FormMode.Update;
+            InitializeComponent();
+            SetupForm();
+
+            editingGroupId = group.Id;
+            editingCreatedOn = group.Created_On;
+            titleLabel.Text = title;
+            saveBtn.Text = actionButtonText;
+            groupNameTextBox.Text = group.DisplayName;
+
+            selectedStudents.Clear();
+            selectedStudents.AddRange(group.Members ?? new List<Student>());
+
+            LoadProjects(group.ProjectId);
+            LoadStudents();
         }
 
         private void SetupForm()
@@ -32,34 +56,51 @@ namespace MidDb26_2025CS127.UI.Froms
             saveBtn.Click += saveBtn_Click;
             cancelBtn.Click += cancelBtn_Click;
 
-            LoadProjects();
-            LoadStudents();
+            if (currentMode == FormMode.Add)
+            {
+                LoadProjects(null);
+                LoadStudents();
+            }
         }
 
-        private void LoadProjects()
+        private void LoadProjects(int? selectedProjectId)
         {
             projects.Clear();
-            projects.AddRange(GroupBL.GetProjectsForAssignment());
+            projects.Add(new Project { Id = 0, Title = "None" });
+            projects.AddRange(GroupBL.GetProjectsForAssignment(currentMode == FormMode.Update ? (int?)editingGroupId : null));
 
             projectComboBox.DataSource = null;
             projectComboBox.DisplayMember = "Title";
             projectComboBox.ValueMember = "Id";
             projectComboBox.DataSource = projects;
-            projectComboBox.SelectedIndex = -1;
+
+            int selectedIndex = 0;
+            if (selectedProjectId.HasValue)
+            {
+                int idx = projects.FindIndex(p => p.Id == selectedProjectId.Value);
+                if (idx >= 0) selectedIndex = idx;
+            }
+            projectComboBox.SelectedIndex = selectedIndex;
         }
 
         private void LoadStudents()
         {
-            unassignedStudents.Clear();
-            unassignedStudents.AddRange(GroupBL.GetUnassignedStudents());
-            BindUnassignedStudents();
+            availableStudents.Clear();
+            availableStudents.AddRange(GroupBL.GetAvailableStudentsForGroup(currentMode == FormMode.Update ? (int?)editingGroupId : null));
+
+            if (selectedStudents.Any())
+            {
+                availableStudents.RemoveAll(s => selectedStudents.Any(sel => sel.Id == s.Id));
+            }
+
+            BindAvailableStudents();
             RenderSelectedStudents();
         }
 
-        private void BindUnassignedStudents()
+        private void BindAvailableStudents()
         {
             unassignedStudentsList.Items.Clear();
-            foreach (var student in unassignedStudents)
+            foreach (var student in availableStudents)
             {
                 unassignedStudentsList.Items.Add(CreateStudentDisplay(student));
             }
@@ -77,10 +118,10 @@ namespace MidDb26_2025CS127.UI.Froms
                 return;
             }
 
-            var selected = unassignedStudents[unassignedStudentsList.SelectedIndex];
+            var selected = availableStudents[unassignedStudentsList.SelectedIndex];
             selectedStudents.Add(selected);
-            unassignedStudents.RemoveAt(unassignedStudentsList.SelectedIndex);
-            BindUnassignedStudents();
+            availableStudents.RemoveAt(unassignedStudentsList.SelectedIndex);
+            BindAvailableStudents();
             RenderSelectedStudents();
         }
 
@@ -144,10 +185,10 @@ namespace MidDb26_2025CS127.UI.Froms
             }
 
             selectedStudents.Remove(student);
-            unassignedStudents.Add(student);
-            unassignedStudents.Sort((a, b) => string.Compare(a.RegistrationNo, b.RegistrationNo, StringComparison.OrdinalIgnoreCase));
+            availableStudents.Add(student);
+            availableStudents.Sort((a, b) => string.Compare(a.RegistrationNo, b.RegistrationNo, StringComparison.OrdinalIgnoreCase));
 
-            BindUnassignedStudents();
+            BindAvailableStudents();
             RenderSelectedStudents();
         }
 
@@ -156,13 +197,14 @@ namespace MidDb26_2025CS127.UI.Froms
             var selectedProject = projectComboBox.SelectedItem as Project;
             var group = new Group
             {
-                Created_On = DateTime.Now,
-                ProjectId = selectedProject != null ? (int?)selectedProject.Id : null,
+                Id = editingGroupId,
+                Created_On = currentMode == FormMode.Update ? editingCreatedOn : DateTime.Now,
+                ProjectId = selectedProject != null && selectedProject.Id > 0 ? (int?)selectedProject.Id : null,
                 Members = selectedStudents.ToList()
             };
 
             string errorMessage;
-            bool success = GroupBL.SaveGroup(group, out errorMessage);
+            bool success = GroupBL.SaveGroup(group, currentMode == FormMode.Update, out errorMessage);
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -176,7 +218,7 @@ namespace MidDb26_2025CS127.UI.Froms
                 return;
             }
 
-            ApplicationStatusService.PublishSuccess("Group created successfully.");
+            ApplicationStatusService.PublishSuccess(currentMode == FormMode.Update ? "Group updated successfully." : "Group created successfully.");
             groupSaved?.Invoke(this, EventArgs.Empty);
             DialogResult = DialogResult.OK;
             Close();
@@ -186,7 +228,6 @@ namespace MidDb26_2025CS127.UI.Froms
         {
             Close();
         }
-
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e) { }
         private void unassignedStudentsLabel_Click(object sender, EventArgs e) { }
