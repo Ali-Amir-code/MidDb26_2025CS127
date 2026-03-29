@@ -15,7 +15,7 @@ namespace MidDb26_2025CS127.BL
             error = string.Empty;
             if (string.IsNullOrWhiteSpace(evaluation.Name))
             {
-                error = "Please select an evaluation type.";
+                error = "Please enter an evaluation name.";
                 return false;
             }
             if (evaluation.TotalMarks <= 0)

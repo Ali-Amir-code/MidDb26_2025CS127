@@ -3,6 +3,7 @@ using MidDb26_2025CS127.Utilities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MidDb26_2025CS127.DAL
 {
@@ -10,7 +11,9 @@ namespace MidDb26_2025CS127.DAL
     {
         public static List<Project> GetAllProjects()
         {
-            var projects = new List<Project>();
+            var projects = new Dictionary<int, Project>();
+            var roleMap = GetAdvisorRoleMap();
+
             const string query = @"SELECT p.Id, p.Title, p.Description,
                                           gp.GroupId,
                                           CONCAT('Group ', gp.GroupId) AS GroupName,
@@ -27,21 +30,43 @@ namespace MidDb26_2025CS127.DAL
             {
                 while (reader.Read())
                 {
-                    projects.Add(new Project
+                    int id = Convert.ToInt32(reader["Id"]);
+                    Project project;
+                    if (!projects.TryGetValue(id, out project))
                     {
-                        Id = Convert.ToInt32(reader["Id"]),
-                        Title = Convert.ToString(reader["Title"]),
-                        Description = Convert.ToString(reader["Description"]),
-                        AssignedGroupCount = reader["GroupId"] == DBNull.Value ? 0 : 1,
-                        AssignedGroupName = Convert.ToString(reader["GroupName"]),
-                        AdvisorId = reader["AdvisorId"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["AdvisorId"]),
-                        AdvisorName = Convert.ToString(reader["AdvisorName"]).Trim(),
-                        AdvisorRoleId = reader["AdvisorRole"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["AdvisorRole"])
-                    });
+                        project = new Project
+                        {
+                            Id = id,
+                            Title = Convert.ToString(reader["Title"]),
+                            Description = Convert.ToString(reader["Description"]),
+                            AssignedGroupCount = reader["GroupId"] == DBNull.Value ? 0 : 1,
+                            AssignedGroupName = Convert.ToString(reader["GroupName"]),
+                            AdvisorName = string.Empty
+                        };
+                        projects[id] = project;
+                    }
+
+                    if (reader["AdvisorId"] != DBNull.Value)
+                    {
+                        int advisorId = Convert.ToInt32(reader["AdvisorId"]);
+                        int roleId = reader["AdvisorRole"] == DBNull.Value ? 0 : Convert.ToInt32(reader["AdvisorRole"]);
+                        string advisorName = Convert.ToString(reader["AdvisorName"]).Trim();
+
+                        if (roleId == roleMap.MainRoleId) project.MainAdvisorId = advisorId;
+                        else if (roleId == roleMap.CoRoleId) project.CoAdvisorId = advisorId;
+                        else if (roleId == roleMap.IndustryRoleId) project.IndustryAdvisorId = advisorId;
+
+                        if (!string.IsNullOrWhiteSpace(advisorName))
+                        {
+                            project.AdvisorName = string.IsNullOrWhiteSpace(project.AdvisorName)
+                                ? advisorName
+                                : project.AdvisorName + ", " + advisorName;
+                        }
+                    }
                 }
             }
 
-            return projects;
+            return projects.Values.ToList();
         }
 
         public static List<Advisor> GetAdvisorOptions()
@@ -121,8 +146,10 @@ namespace MidDb26_2025CS127.DAL
             }) > 0;
         }
 
-        public static void SaveProjectAdvisor(int projectId, int? advisorId, int? roleId)
+        public static void SaveProjectAdvisors(int projectId, Project project)
         {
+            var roleMap = GetAdvisorRoleMap();
+
             using (var connection = DatabaseHelper.GetConnection())
             {
                 connection.Open();
@@ -133,37 +160,70 @@ namespace MidDb26_2025CS127.DAL
                         deleteCmd.ExecuteNonQuery();
                     }
 
-                    if (advisorId.HasValue && advisorId.Value > 0)
-                    {
-                        int resolvedRoleId = roleId.HasValue && roleId.Value > 0 ? roleId.Value : GetDefaultAdvisorRoleId(connection, transaction);
-                        using (var insertCmd = DatabaseHelper.CreateCommand(connection,
-                            "INSERT INTO projectadvisor (AdvisorId, ProjectId, AdvisorRole, AssignmentDate) VALUES (@advisorId, @projectId, @roleId, @date);",
-                            new Dictionary<string, object>
-                            {
-                                { "@advisorId", advisorId.Value },
-                                { "@projectId", projectId },
-                                { "@roleId", resolvedRoleId },
-                                { "@date", DateTime.Now }
-                            }, transaction))
-                        {
-                            insertCmd.ExecuteNonQuery();
-                        }
-                    }
+                    InsertProjectAdvisor(connection, transaction, projectId, project.MainAdvisorId, roleMap.MainRoleId);
+                    InsertProjectAdvisor(connection, transaction, projectId, project.CoAdvisorId, roleMap.CoRoleId);
+                    InsertProjectAdvisor(connection, transaction, projectId, project.IndustryAdvisorId, roleMap.IndustryRoleId);
 
                     transaction.Commit();
                 }
             }
         }
 
-        private static int GetDefaultAdvisorRoleId(MySqlConnection connection, MySqlTransaction transaction)
+        private static void InsertProjectAdvisor(MySqlConnection connection, MySqlTransaction transaction, int projectId, int? advisorId, int roleId)
         {
-            const string query = @"SELECT Id FROM lookup WHERE UPPER(Category) LIKE '%ADVISOR%ROLE%' ORDER BY Id LIMIT 1;";
-            using (var cmd = DatabaseHelper.CreateCommand(connection, query, new Dictionary<string, object>(), transaction))
+            if (!advisorId.HasValue || advisorId.Value <= 0 || roleId <= 0) return;
+
+            using (var insertCmd = DatabaseHelper.CreateCommand(connection,
+                "INSERT INTO projectadvisor (AdvisorId, ProjectId, AdvisorRole, AssignmentDate) VALUES (@advisorId, @projectId, @roleId, @date);",
+                new Dictionary<string, object>
+                {
+                    { "@advisorId", advisorId.Value },
+                    { "@projectId", projectId },
+                    { "@roleId", roleId },
+                    { "@date", DateTime.Now }
+                }, transaction))
             {
-                object value = cmd.ExecuteScalar();
-                if (value != null && value != DBNull.Value) return Convert.ToInt32(value);
+                insertCmd.ExecuteNonQuery();
             }
-            return 11;
+        }
+
+        private class AdvisorRoleMap
+        {
+            public int MainRoleId { get; set; }
+            public int CoRoleId { get; set; }
+            public int IndustryRoleId { get; set; }
+        }
+
+        private static AdvisorRoleMap GetAdvisorRoleMap()
+        {
+            var map = new AdvisorRoleMap();
+            const string query = @"SELECT Id, Value FROM lookup WHERE UPPER(Category) LIKE '%ADVISOR%ROLE%';";
+            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
+            {
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader["Id"]);
+                    string value = Convert.ToString(reader["Value"]).ToUpperInvariant();
+                    if (value.Contains("MAIN")) map.MainRoleId = id;
+                    else if (value.Contains("CO")) map.CoRoleId = id;
+                    else if (value.Contains("INDUSTRY")) map.IndustryRoleId = id;
+                }
+            }
+
+            if (map.MainRoleId == 0 || map.CoRoleId == 0 || map.IndustryRoleId == 0)
+            {
+                const string fallback = @"SELECT Id FROM lookup WHERE UPPER(Category) LIKE '%ADVISOR%ROLE%' ORDER BY Id;";
+                var ids = new List<int>();
+                using (var reader = DatabaseHelper.GetData(fallback, new Dictionary<string, object>()))
+                {
+                    while (reader.Read()) ids.Add(Convert.ToInt32(reader["Id"]));
+                }
+                if (ids.Count > 0 && map.MainRoleId == 0) map.MainRoleId = ids[0];
+                if (ids.Count > 1 && map.CoRoleId == 0) map.CoRoleId = ids[1];
+                if (ids.Count > 2 && map.IndustryRoleId == 0) map.IndustryRoleId = ids[2];
+            }
+
+            return map;
         }
 
         public static bool DeleteProject(int projectId)
