@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.subtitleLabel = new System.Windows.Forms.Label();
             this.breadcrumbLabel = new System.Windows.Forms.Label();
@@ -60,6 +60,12 @@
             this.projectTitleLabel = new System.Windows.Forms.Label();
             this.saperator = new System.Windows.Forms.Panel();
             this.formLabel = new System.Windows.Forms.Label();
+            this.industryAdvisorComboBox = new System.Windows.Forms.ComboBox();
+            this.coAdvisorComboBox = new System.Windows.Forms.ComboBox();
+            this.mainAdvisorComboBox = new System.Windows.Forms.ComboBox();
+            this.mainAdvisorLabel = new System.Windows.Forms.Label();
+            this.coAdvisorLabel = new System.Windows.Forms.Label();
+            this.industyAdvisorLabel = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.gridContainer.SuspendLayout();
@@ -208,34 +214,34 @@
             // 
             this.projectListGrid.AllowUserToAddRows = false;
             this.projectListGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            this.projectListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            this.projectListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.projectListGrid.BackgroundColor = System.Drawing.Color.White;
             this.projectListGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.projectListGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.projectListGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.projectListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.projectListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.titleColumn,
             this.groupColumn,
             this.descriptionColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.projectListGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.projectListGrid.DefaultCellStyle = dataGridViewCellStyle6;
             this.projectListGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.projectListGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
             this.projectListGrid.Location = new System.Drawing.Point(3, 48);
@@ -337,6 +343,12 @@
             // formPanel
             // 
             this.formPanel.BackColor = System.Drawing.Color.Transparent;
+            this.formPanel.Controls.Add(this.industyAdvisorLabel);
+            this.formPanel.Controls.Add(this.coAdvisorLabel);
+            this.formPanel.Controls.Add(this.mainAdvisorLabel);
+            this.formPanel.Controls.Add(this.industryAdvisorComboBox);
+            this.formPanel.Controls.Add(this.coAdvisorComboBox);
+            this.formPanel.Controls.Add(this.mainAdvisorComboBox);
             this.formPanel.Controls.Add(this.clearBtn);
             this.formPanel.Controls.Add(this.selectBtn);
             this.formPanel.Controls.Add(this.firstNameTextBox);
@@ -350,13 +362,14 @@
             this.formPanel.Name = "formPanel";
             this.formPanel.Size = new System.Drawing.Size(245, 422);
             this.formPanel.TabIndex = 1;
+            this.formPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.formPanel_Paint);
             // 
             // clearBtn
             // 
             this.clearBtn.BackColor = System.Drawing.Color.White;
             this.clearBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearBtn.ForeColor = System.Drawing.Color.Black;
-            this.clearBtn.Location = new System.Drawing.Point(122, 133);
+            this.clearBtn.Location = new System.Drawing.Point(122, 314);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(72, 30);
             this.clearBtn.TabIndex = 17;
@@ -368,7 +381,7 @@
             this.selectBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(182)))), ((int)(((byte)(212)))));
             this.selectBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectBtn.ForeColor = System.Drawing.Color.White;
-            this.selectBtn.Location = new System.Drawing.Point(11, 133);
+            this.selectBtn.Location = new System.Drawing.Point(11, 314);
             this.selectBtn.Name = "selectBtn";
             this.selectBtn.Size = new System.Drawing.Size(105, 30);
             this.selectBtn.TabIndex = 16;
@@ -392,6 +405,7 @@
             this.descriptionLabel.Size = new System.Drawing.Size(96, 17);
             this.descriptionLabel.TabIndex = 4;
             this.descriptionLabel.Text = "DESCRIPTION:";
+            this.descriptionLabel.Click += new System.EventHandler(this.descriptionLabel_Click);
             // 
             // regNoTextBox
             // 
@@ -428,6 +442,74 @@
             this.formLabel.Size = new System.Drawing.Size(119, 23);
             this.formLabel.TabIndex = 0;
             this.formLabel.Text = "Select Project";
+            // 
+            // industryAdvisorComboBox
+            // 
+            this.industryAdvisorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.industryAdvisorComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.industryAdvisorComboBox.FormattingEnabled = true;
+            this.industryAdvisorComboBox.Location = new System.Drawing.Point(11, 260);
+            this.industryAdvisorComboBox.MaxDropDownItems = 12;
+            this.industryAdvisorComboBox.Name = "industryAdvisorComboBox";
+            this.industryAdvisorComboBox.Size = new System.Drawing.Size(225, 24);
+            this.industryAdvisorComboBox.TabIndex = 67;
+            // 
+            // coAdvisorComboBox
+            // 
+            this.coAdvisorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.coAdvisorComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.coAdvisorComboBox.FormattingEnabled = true;
+            this.coAdvisorComboBox.Location = new System.Drawing.Point(11, 213);
+            this.coAdvisorComboBox.MaxDropDownItems = 12;
+            this.coAdvisorComboBox.Name = "coAdvisorComboBox";
+            this.coAdvisorComboBox.Size = new System.Drawing.Size(225, 24);
+            this.coAdvisorComboBox.TabIndex = 65;
+            this.coAdvisorComboBox.SelectedIndexChanged += new System.EventHandler(this.coAdvisorComboBox_SelectedIndexChanged);
+            // 
+            // mainAdvisorComboBox
+            // 
+            this.mainAdvisorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainAdvisorComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.mainAdvisorComboBox.FormattingEnabled = true;
+            this.mainAdvisorComboBox.Location = new System.Drawing.Point(11, 160);
+            this.mainAdvisorComboBox.MaxDropDownItems = 12;
+            this.mainAdvisorComboBox.Name = "mainAdvisorComboBox";
+            this.mainAdvisorComboBox.Size = new System.Drawing.Size(225, 24);
+            this.mainAdvisorComboBox.TabIndex = 63;
+            this.mainAdvisorComboBox.SelectedIndexChanged += new System.EventHandler(this.mainAdvisorComboBox_SelectedIndexChanged);
+            // 
+            // mainAdvisorLabel
+            // 
+            this.mainAdvisorLabel.AutoSize = true;
+            this.mainAdvisorLabel.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainAdvisorLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.mainAdvisorLabel.Location = new System.Drawing.Point(8, 130);
+            this.mainAdvisorLabel.Name = "mainAdvisorLabel";
+            this.mainAdvisorLabel.Size = new System.Drawing.Size(108, 17);
+            this.mainAdvisorLabel.TabIndex = 68;
+            this.mainAdvisorLabel.Text = "MAIN ADVISOR:";
+            // 
+            // coAdvisorLabel
+            // 
+            this.coAdvisorLabel.AutoSize = true;
+            this.coAdvisorLabel.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.coAdvisorLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.coAdvisorLabel.Location = new System.Drawing.Point(8, 188);
+            this.coAdvisorLabel.Name = "coAdvisorLabel";
+            this.coAdvisorLabel.Size = new System.Drawing.Size(92, 17);
+            this.coAdvisorLabel.TabIndex = 69;
+            this.coAdvisorLabel.Text = "CO-ADVISOR:";
+            // 
+            // industyAdvisorLabel
+            // 
+            this.industyAdvisorLabel.AutoSize = true;
+            this.industyAdvisorLabel.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.industyAdvisorLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.industyAdvisorLabel.Location = new System.Drawing.Point(8, 240);
+            this.industyAdvisorLabel.Name = "industyAdvisorLabel";
+            this.industyAdvisorLabel.Size = new System.Drawing.Size(137, 17);
+            this.industyAdvisorLabel.TabIndex = 70;
+            this.industyAdvisorLabel.Text = "INDUSTRY ADVISOR:";
             // 
             // ProjectControl
             // 
@@ -483,5 +565,11 @@
         private System.Windows.Forms.ComboBox sortComboBox;
         private System.Windows.Forms.Label sortByLabel;
         private System.Windows.Forms.Label gridHeaderLabel;
+        private System.Windows.Forms.ComboBox industryAdvisorComboBox;
+        private System.Windows.Forms.ComboBox coAdvisorComboBox;
+        private System.Windows.Forms.ComboBox mainAdvisorComboBox;
+        private System.Windows.Forms.Label mainAdvisorLabel;
+        private System.Windows.Forms.Label industyAdvisorLabel;
+        private System.Windows.Forms.Label coAdvisorLabel;
     }
 }

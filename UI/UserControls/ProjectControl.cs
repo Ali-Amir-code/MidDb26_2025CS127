@@ -172,5 +172,30 @@ namespace MidDb26_2025CS127.UI.UserControls
                 form.ShowDialog();
             }
         }
+
+        private void coAdvisorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void mainAdvisorLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descriptionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainAdvisorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

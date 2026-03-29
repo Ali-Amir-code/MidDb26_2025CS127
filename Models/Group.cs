@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MidDb26_2025CS127.Models
 {
-    internal class Group
+    public class Group
     {
         public int Id { get; set; }
         public DateTime Created_On { get; set; }

@@ -57,11 +57,9 @@
             this.deleteAdvisorBtn = new System.Windows.Forms.Button();
             this.addAdvisorBtn = new System.Windows.Forms.Button();
             this.formPanel = new System.Windows.Forms.Panel();
-            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
-            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.selectBtn = new System.Windows.Forms.Button();
@@ -688,7 +686,7 @@
         private System.Windows.Forms.DataGridView advisorListGrid;
         private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label salaryLabel;
-        private System.Windows.Forms.ComboBox designationComboBox;
+
         private System.Windows.Forms.Label designationLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
