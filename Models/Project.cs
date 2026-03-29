@@ -16,6 +16,9 @@ namespace MidDb26_2025CS127.Models
         public int? AdvisorId { get; set; }
         public int? AdvisorRoleId { get; set; }
         public string AdvisorName { get; set; }
+        public int? MainAdvisorId { get; set; }
+        public int? CoAdvisorId { get; set; }
+        public int? IndustryAdvisorId { get; set; }
 
         public Project() { }
 

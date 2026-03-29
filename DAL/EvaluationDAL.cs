@@ -55,6 +55,8 @@ namespace MidDb26_2025CS127.DAL
 
         public static bool AddEvaluation(Evaluation evaluation)
         {
+            EnsureEvaluationNameLookupEntry(evaluation.Name);
+
             const string query = @"INSERT INTO evaluation (Name, TotalMarks, TotalWeightage)
                                    VALUES (@name, @totalMarks, @weightage);";
             return DatabaseHelper.Update(query, new Dictionary<string, object>
@@ -93,28 +95,25 @@ namespace MidDb26_2025CS127.DAL
             return rows;
         }
 
-        private static void EnsureEvaluationTypes()
+        private static void EnsureEvaluationNameLookupEntry(string evaluationName)
         {
-            string[] defaults = { "Final", "Mid", "Proposal" };
             using (var connection = DatabaseHelper.GetConnection())
             {
                 connection.Open();
-                foreach (var name in defaults)
-                {
-                    const string existsQuery = @"SELECT COUNT(1) FROM lookup
-                                                 WHERE UPPER(Category) = 'EVALUATION_TYPE'
-                                                   AND UPPER(Value) = UPPER(@value);";
-                    using (var existsCommand = DatabaseHelper.CreateCommand(connection, existsQuery, new Dictionary<string, object> { { "@value", name } }))
-                    {
-                        long count = Convert.ToInt64(existsCommand.ExecuteScalar());
-                        if (count > 0) continue;
-                    }
 
-                    const string insertQuery = "INSERT INTO lookup (Category, Value) VALUES ('EVALUATION_TYPE', @value);";
-                    using (var insertCommand = DatabaseHelper.CreateCommand(connection, insertQuery, new Dictionary<string, object> { { "@value", name } }))
-                    {
-                        insertCommand.ExecuteNonQuery();
-                    }
+                const string existsQuery = @"SELECT COUNT(1) FROM lookup
+                                             WHERE UPPER(Category) = 'EVALUATION_NAME'
+                                               AND UPPER(Value) = UPPER(@value);";
+                using (var existsCommand = DatabaseHelper.CreateCommand(connection, existsQuery, new Dictionary<string, object> { { "@value", evaluationName } }))
+                {
+                    long count = Convert.ToInt64(existsCommand.ExecuteScalar());
+                    if (count > 0) return;
+                }
+
+                const string insertQuery = "INSERT INTO lookup (Category, Value) VALUES ('EVALUATION_NAME', @value);";
+                using (var insertCommand = DatabaseHelper.CreateCommand(connection, insertQuery, new Dictionary<string, object> { { "@value", evaluationName } }))
+                {
+                    insertCommand.ExecuteNonQuery();
                 }
             }
         }
