@@ -35,16 +35,30 @@ namespace MidDb26_2025CS127.UI.Froms
             lastNameTextBox.Text = advisor.LastName ?? string.Empty;
             contactTextBox.Text = advisor.Contact ?? string.Empty;
             emailTextBox.Text = advisor.Email;
-            textBox1.Text = advisor.Salary.HasValue ? advisor.Salary.Value.ToString("0.##") : string.Empty;
-            SelectDesignation(advisor.Designation);
+            salaryTextBox.Text = advisor.Salary.HasValue ? advisor.Salary.Value.ToString("0.##") : string.Empty;
+            textBox2.Text = !string.IsNullOrWhiteSpace(advisor.DesignationLabel)
+                ? advisor.DesignationLabel
+                : ResolveDesignationText(advisor.Designation);
 
-            dateTimePicker1.Checked = advisor.DateOfBirth.HasValue;
-            if (advisor.DateOfBirth.HasValue)
+            if (advisor.DateOfBirth == null)
             {
+                dateTimePicker1.Checked = false;
+            }
+            else
+            {
+                dateTimePicker1.Checked = true;
                 dateTimePicker1.Value = advisor.DateOfBirth.Value;
             }
 
-            genderComboBox.SelectedIndex = !advisor.Gender.HasValue || advisor.Gender < 1 ? -1 : (advisor.Gender == 2 ? 1 : 0);
+            if (advisor.Gender == null || advisor.Gender < 1)
+            {
+                genderComboBox.SelectedIndex = -1;
+            }
+            else
+            {
+                genderComboBox.SelectedIndex = advisor.Gender == 2 ? 1 : 0;
+            }
+
             addBtn.Text = btnText;
         }
 
@@ -88,6 +102,8 @@ namespace MidDb26_2025CS127.UI.Froms
             lastNameTextBox.Text = string.Empty;
             designationComboBox.SelectedIndex = -1;
             textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
             dateTimePicker1.Checked = false;
@@ -102,7 +118,14 @@ namespace MidDb26_2025CS127.UI.Froms
         private Advisor BuildAdvisorFromForm()
         {
             decimal parsedSalary;
-            var selectedDesignation = designationComboBox.SelectedItem as Lookup;
+            int parsedDesignation;
+            var designationText = textBox2.Text.Trim();
+
+            if (!int.TryParse(designationText, out parsedDesignation))
+            {
+                var match = designationLookups.FirstOrDefault(d => d.Value.Equals(designationText, StringComparison.OrdinalIgnoreCase));
+                parsedDesignation = match != null ? match.Id : -1;
+            }
 
             return new Advisor
             {
@@ -144,6 +167,12 @@ namespace MidDb26_2025CS127.UI.Froms
             MessageBox.Show(isUpdate ? "Advisor updated successfully." : "Advisor added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private string ResolveDesignationText(int designationId)
+        {
+            var match = designationLookups.FirstOrDefault(d => d.Id == designationId);
+            return match != null ? match.Value : designationId.ToString();
         }
     }
 }

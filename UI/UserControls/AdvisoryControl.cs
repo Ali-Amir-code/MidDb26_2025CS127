@@ -11,14 +11,12 @@ namespace MidDb26_2025CS127.UI.UserControls
 {
     public partial class AdvisoryControl : UserControl
     {
-        private List<Advisor> advisors = new List<Advisor>();
-        private List<Lookup> designationLookups = new List<Lookup>();
+        public List<Advisor> advisors = new List<Advisor>();
 
         public AdvisoryControl(List<Advisor> advisors)
         {
             InitializeComponent();
             this.advisors = advisors ?? new List<Advisor>();
-            LoadDesignationFilterOptions();
             LoadAdvisors(this.advisors);
             ApplicationStatusService.PublishSuccess("Advisor records loaded.");
 
@@ -26,18 +24,6 @@ namespace MidDb26_2025CS127.UI.UserControls
             clearBtn.Click += clearBtn_Click;
             deleteAdvisorBtn.Click += deleteAdvisorBtn_Click;
             advisorListGrid.CellContentClick += advisorListGrid_CellContentClick;
-        }
-
-        private void LoadDesignationFilterOptions()
-        {
-            designationLookups = AdvisorBL.GetDesignationLookups() ?? new List<Lookup>();
-            designationComboBox.Items.Clear();
-            designationComboBox.Items.Add("All");
-            foreach (var designation in designationLookups)
-            {
-                designationComboBox.Items.Add(designation.Value);
-            }
-            designationComboBox.SelectedIndex = 0;
         }
 
         private void LoadAdvisors(List<Advisor> advisorItems)
@@ -66,7 +52,6 @@ namespace MidDb26_2025CS127.UI.UserControls
         private void RefreshData()
         {
             ApplicationStatusService.PublishInfo("Refreshing advisor data...");
-            LoadDesignationFilterOptions();
             LoadAdvisors(AdvisorBL.GetAllAdvisors());
         }
 
@@ -89,8 +74,8 @@ namespace MidDb26_2025CS127.UI.UserControls
         {
             string firstName = firstNameTextBox.Text.Trim();
             string lastName = lastNameTextBox.Text.Trim();
-            string designation = designationComboBox.SelectedItem != null ? designationComboBox.SelectedItem.ToString() : string.Empty;
-            string salary = textBox1.Text.Trim();
+            string designation = textBox2.Text.Trim();
+            string salary = salaryTextBox.Text.Trim();
             string contact = contactTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();
             string genderText = genderComboBox.SelectedItem != null ? genderComboBox.SelectedItem.ToString() : string.Empty;
@@ -99,7 +84,7 @@ namespace MidDb26_2025CS127.UI.UserControls
 
             bool hasAnyCriteria = !string.IsNullOrWhiteSpace(firstName)
                 || !string.IsNullOrWhiteSpace(lastName)
-                || (!string.IsNullOrWhiteSpace(designation) && !designation.Equals("All", StringComparison.OrdinalIgnoreCase))
+                || !string.IsNullOrWhiteSpace(designation)
                 || !string.IsNullOrWhiteSpace(salary)
                 || !string.IsNullOrWhiteSpace(contact)
                 || !string.IsNullOrWhiteSpace(email)
@@ -120,9 +105,7 @@ namespace MidDb26_2025CS127.UI.UserControls
                 else if (genderText.Equals("Female", StringComparison.OrdinalIgnoreCase)) genderVal = 2;
             }
 
-            var filtered = AdvisorBL.FilterAdvisors(advisors, firstName, lastName,
-                designation.Equals("All", StringComparison.OrdinalIgnoreCase) ? string.Empty : designation,
-                salary, contact, email, genderVal, dob);
+            var filtered = AdvisorBL.FilterAdvisors(advisors, firstName, lastName, designation, salary, contact, email, genderVal, dob);
 
             if (!filtered.Any())
             {
@@ -139,8 +122,8 @@ namespace MidDb26_2025CS127.UI.UserControls
         {
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
-            designationComboBox.SelectedIndex = designationComboBox.Items.Count > 0 ? 0 : -1;
-            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
             genderComboBox.SelectedIndex = -1;

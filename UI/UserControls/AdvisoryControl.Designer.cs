@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.subtitleLabel = new System.Windows.Forms.Label();
             this.breadcrumbLabel = new System.Windows.Forms.Label();
@@ -39,6 +39,18 @@
             this.mainPanel = new System.Windows.Forms.TableLayoutPanel();
             this.gridContainer = new System.Windows.Forms.TableLayoutPanel();
             this.advisorListGrid = new System.Windows.Forms.DataGridView();
+            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.designationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.salaryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dobColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.editColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actionPanel = new System.Windows.Forms.Panel();
             this.exportAdvisorBtn = new System.Windows.Forms.Button();
             this.importAdvisorBtn = new System.Windows.Forms.Button();
@@ -46,7 +58,7 @@
             this.addAdvisorBtn = new System.Windows.Forms.Button();
             this.formPanel = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
             this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
@@ -65,18 +77,7 @@
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.saperator = new System.Windows.Forms.Panel();
             this.formLabel = new System.Windows.Forms.Label();
-            this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.designationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salaryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dobColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.editColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.headerPanel.SuspendLayout();
             this.mainPanel.SuspendLayout();
             this.gridContainer.SuspendLayout();
@@ -174,20 +175,20 @@
             // 
             this.advisorListGrid.AllowUserToAddRows = false;
             this.advisorListGrid.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            this.advisorListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            this.advisorListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.advisorListGrid.BackgroundColor = System.Drawing.Color.White;
             this.advisorListGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.advisorListGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.advisorListGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.advisorListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.advisorListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.advisorListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.advisorListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn,
@@ -202,15 +203,15 @@
             this.groupColumn,
             this.deleteColumn,
             this.editColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.advisorListGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(242)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.advisorListGrid.DefaultCellStyle = dataGridViewCellStyle6;
             this.advisorListGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advisorListGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
             this.advisorListGrid.Location = new System.Drawing.Point(3, 3);
@@ -222,6 +223,103 @@
             this.advisorListGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.advisorListGrid.Size = new System.Drawing.Size(595, 418);
             this.advisorListGrid.TabIndex = 2;
+            // 
+            // idColumn
+            // 
+            this.idColumn.HeaderText = "ID";
+            this.idColumn.MinimumWidth = 6;
+            this.idColumn.Name = "idColumn";
+            this.idColumn.ReadOnly = true;
+            this.idColumn.Visible = false;
+            this.idColumn.Width = 125;
+            // 
+            // firstNameColumn
+            // 
+            this.firstNameColumn.HeaderText = "First Name";
+            this.firstNameColumn.MinimumWidth = 6;
+            this.firstNameColumn.Name = "firstNameColumn";
+            this.firstNameColumn.ReadOnly = true;
+            this.firstNameColumn.Width = 68;
+            // 
+            // lastNameColumn
+            // 
+            this.lastNameColumn.HeaderText = "Last Name";
+            this.lastNameColumn.MinimumWidth = 6;
+            this.lastNameColumn.Name = "lastNameColumn";
+            this.lastNameColumn.ReadOnly = true;
+            this.lastNameColumn.Width = 68;
+            // 
+            // designationColumn
+            // 
+            this.designationColumn.HeaderText = "Desgination";
+            this.designationColumn.MinimumWidth = 6;
+            this.designationColumn.Name = "designationColumn";
+            this.designationColumn.ReadOnly = true;
+            this.designationColumn.Width = 125;
+            // 
+            // salaryColumn
+            // 
+            this.salaryColumn.HeaderText = "Salary";
+            this.salaryColumn.MinimumWidth = 6;
+            this.salaryColumn.Name = "salaryColumn";
+            this.salaryColumn.ReadOnly = true;
+            this.salaryColumn.Width = 125;
+            // 
+            // contactColumn
+            // 
+            this.contactColumn.HeaderText = "Contact";
+            this.contactColumn.MinimumWidth = 6;
+            this.contactColumn.Name = "contactColumn";
+            this.contactColumn.ReadOnly = true;
+            this.contactColumn.Width = 67;
+            // 
+            // emailColumn
+            // 
+            this.emailColumn.HeaderText = "Email";
+            this.emailColumn.MinimumWidth = 6;
+            this.emailColumn.Name = "emailColumn";
+            this.emailColumn.ReadOnly = true;
+            this.emailColumn.Width = 68;
+            // 
+            // dobColumn
+            // 
+            this.dobColumn.HeaderText = "Date of Birth";
+            this.dobColumn.MinimumWidth = 6;
+            this.dobColumn.Name = "dobColumn";
+            this.dobColumn.ReadOnly = true;
+            this.dobColumn.Width = 68;
+            // 
+            // genderColumn
+            // 
+            this.genderColumn.HeaderText = "Gender";
+            this.genderColumn.MinimumWidth = 6;
+            this.genderColumn.Name = "genderColumn";
+            this.genderColumn.ReadOnly = true;
+            this.genderColumn.Width = 68;
+            // 
+            // groupColumn
+            // 
+            this.groupColumn.HeaderText = "Group";
+            this.groupColumn.MinimumWidth = 6;
+            this.groupColumn.Name = "groupColumn";
+            this.groupColumn.ReadOnly = true;
+            this.groupColumn.Width = 67;
+            // 
+            // deleteColumn
+            // 
+            this.deleteColumn.HeaderText = "Delete";
+            this.deleteColumn.MinimumWidth = 6;
+            this.deleteColumn.Name = "deleteColumn";
+            this.deleteColumn.ReadOnly = true;
+            this.deleteColumn.Width = 68;
+            // 
+            // editColumn
+            // 
+            this.editColumn.HeaderText = "Edit";
+            this.editColumn.MinimumWidth = 6;
+            this.editColumn.Name = "editColumn";
+            this.editColumn.ReadOnly = true;
+            this.editColumn.Width = 125;
             // 
             // actionPanel
             // 
@@ -288,8 +386,9 @@
             // formPanel
             // 
             this.formPanel.BackColor = System.Drawing.Color.Transparent;
+            this.formPanel.Controls.Add(this.designationComboBox);
             this.formPanel.Controls.Add(this.dateTimePicker1);
-            this.formPanel.Controls.Add(this.textBox1);
+            this.formPanel.Controls.Add(this.salaryTextBox);
             this.formPanel.Controls.Add(this.salaryLabel);
             this.formPanel.Controls.Add(this.designationComboBox);
             this.formPanel.Controls.Add(this.designationLabel);
@@ -321,13 +420,13 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(222, 22);
             this.dateTimePicker1.TabIndex = 22;
             // 
-            // textBox1
+            // salaryTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(11, 195);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(225, 22);
-            this.textBox1.TabIndex = 21;
-            this.textBox1.Tag = "";
+            this.salaryTextBox.Location = new System.Drawing.Point(11, 195);
+            this.salaryTextBox.Name = "salaryTextBox";
+            this.salaryTextBox.Size = new System.Drawing.Size(225, 22);
+            this.salaryTextBox.TabIndex = 21;
+            this.salaryTextBox.Tag = "";
             // 
             // salaryLabel
             // 
@@ -516,102 +615,23 @@
             this.formLabel.TabIndex = 0;
             this.formLabel.Text = "Select Advisor";
             // 
-            // idColumn
+            // designationComboBox
             // 
-            this.idColumn.HeaderText = "ID";
-            this.idColumn.MinimumWidth = 6;
-            this.idColumn.Name = "idColumn";
-            this.idColumn.ReadOnly = true;
-            this.idColumn.Visible = false;
-            this.idColumn.Width = 125;
-            // 
-            // firstNameColumn
-            // 
-            this.firstNameColumn.HeaderText = "First Name";
-            this.firstNameColumn.MinimumWidth = 6;
-            this.firstNameColumn.Name = "firstNameColumn";
-            this.firstNameColumn.ReadOnly = true;
-            this.firstNameColumn.Width = 68;
-            // 
-            // lastNameColumn
-            // 
-            this.lastNameColumn.HeaderText = "Last Name";
-            this.lastNameColumn.MinimumWidth = 6;
-            this.lastNameColumn.Name = "lastNameColumn";
-            this.lastNameColumn.ReadOnly = true;
-            this.lastNameColumn.Width = 68;
-            // 
-            // designationColumn
-            // 
-            this.designationColumn.HeaderText = "Desgination";
-            this.designationColumn.MinimumWidth = 6;
-            this.designationColumn.Name = "designationColumn";
-            this.designationColumn.ReadOnly = true;
-            this.designationColumn.Width = 125;
-            // 
-            // salaryColumn
-            // 
-            this.salaryColumn.HeaderText = "Salary";
-            this.salaryColumn.MinimumWidth = 6;
-            this.salaryColumn.Name = "salaryColumn";
-            this.salaryColumn.ReadOnly = true;
-            this.salaryColumn.Width = 125;
-            // 
-            // contactColumn
-            // 
-            this.contactColumn.HeaderText = "Contact";
-            this.contactColumn.MinimumWidth = 6;
-            this.contactColumn.Name = "contactColumn";
-            this.contactColumn.ReadOnly = true;
-            this.contactColumn.Width = 67;
-            // 
-            // emailColumn
-            // 
-            this.emailColumn.HeaderText = "Email";
-            this.emailColumn.MinimumWidth = 6;
-            this.emailColumn.Name = "emailColumn";
-            this.emailColumn.ReadOnly = true;
-            this.emailColumn.Width = 68;
-            // 
-            // dobColumn
-            // 
-            this.dobColumn.HeaderText = "Date of Birth";
-            this.dobColumn.MinimumWidth = 6;
-            this.dobColumn.Name = "dobColumn";
-            this.dobColumn.ReadOnly = true;
-            this.dobColumn.Width = 68;
-            // 
-            // genderColumn
-            // 
-            this.genderColumn.HeaderText = "Gender";
-            this.genderColumn.MinimumWidth = 6;
-            this.genderColumn.Name = "genderColumn";
-            this.genderColumn.ReadOnly = true;
-            this.genderColumn.Width = 68;
-            // 
-            // groupColumn
-            // 
-            this.groupColumn.HeaderText = "Group";
-            this.groupColumn.MinimumWidth = 6;
-            this.groupColumn.Name = "groupColumn";
-            this.groupColumn.ReadOnly = true;
-            this.groupColumn.Width = 67;
-            // 
-            // deleteColumn
-            // 
-            this.deleteColumn.HeaderText = "Delete";
-            this.deleteColumn.MinimumWidth = 6;
-            this.deleteColumn.Name = "deleteColumn";
-            this.deleteColumn.ReadOnly = true;
-            this.deleteColumn.Width = 68;
-            // 
-            // editColumn
-            // 
-            this.editColumn.HeaderText = "Edit";
-            this.editColumn.MinimumWidth = 6;
-            this.editColumn.Name = "editColumn";
-            this.editColumn.ReadOnly = true;
-            this.editColumn.Width = 125;
+            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.designationComboBox.FormattingEnabled = true;
+            this.designationComboBox.Items.AddRange(new object[] {
+            " All",
+            "Professor",
+            "Associate Professor",
+            "Assistant Professor",
+            "Lecturer",
+            "Industry Professional"});
+            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
+            this.designationComboBox.MaxDropDownItems = 12;
+            this.designationComboBox.Name = "designationComboBox";
+            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
+            this.designationComboBox.TabIndex = 23;
             // 
             // AdvisoryControl
             // 
@@ -665,7 +685,7 @@
         private System.Windows.Forms.Panel saperator;
         private System.Windows.Forms.Label formLabel;
         private System.Windows.Forms.DataGridView advisorListGrid;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label salaryLabel;
         private System.Windows.Forms.ComboBox designationComboBox;
         private System.Windows.Forms.Label designationLabel;
@@ -682,5 +702,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn groupColumn;
         private System.Windows.Forms.DataGridViewButtonColumn deleteColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editColumn;
+        private System.Windows.Forms.ComboBox designationComboBox;
     }
 }
