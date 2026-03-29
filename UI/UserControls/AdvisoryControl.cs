@@ -11,7 +11,7 @@ namespace MidDb26_2025CS127.UI.UserControls
 {
     public partial class AdvisoryControl : UserControl
     {
-        private List<Advisor> advisors = new List<Advisor>();
+        public List<Advisor> advisors = new List<Advisor>();
 
         public AdvisoryControl(List<Advisor> advisors)
         {
@@ -75,7 +75,7 @@ namespace MidDb26_2025CS127.UI.UserControls
             string firstName = firstNameTextBox.Text.Trim();
             string lastName = lastNameTextBox.Text.Trim();
             string designation = textBox2.Text.Trim();
-            string salary = textBox1.Text.Trim();
+            string salary = salaryTextBox.Text.Trim();
             string contact = contactTextBox.Text.Trim();
             string email = emailTextBox.Text.Trim();
             string genderText = genderComboBox.SelectedItem != null ? genderComboBox.SelectedItem.ToString() : string.Empty;
@@ -123,7 +123,7 @@ namespace MidDb26_2025CS127.UI.UserControls
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
             textBox2.Text = string.Empty;
-            textBox1.Text = string.Empty;
+            salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
             genderComboBox.SelectedIndex = -1;

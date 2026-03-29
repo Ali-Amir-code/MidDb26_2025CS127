@@ -35,7 +35,7 @@ namespace MidDb26_2025CS127.UI.Froms
             lastNameTextBox.Text = advisor.LastName ?? string.Empty;
             contactTextBox.Text = advisor.Contact ?? string.Empty;
             emailTextBox.Text = advisor.Email;
-            textBox1.Text = advisor.Salary.HasValue ? advisor.Salary.Value.ToString("0.##") : string.Empty;
+            salaryTextBox.Text = advisor.Salary.HasValue ? advisor.Salary.Value.ToString("0.##") : string.Empty;
             textBox2.Text = !string.IsNullOrWhiteSpace(advisor.DesignationLabel)
                 ? advisor.DesignationLabel
                 : ResolveDesignationText(advisor.Designation);
@@ -87,7 +87,7 @@ namespace MidDb26_2025CS127.UI.Froms
             firstNameTextBox.Text = string.Empty;
             lastNameTextBox.Text = string.Empty;
             textBox2.Text = string.Empty;
-            textBox1.Text = string.Empty;
+            salaryTextBox.Text = string.Empty;
             contactTextBox.Text = string.Empty;
             emailTextBox.Text = string.Empty;
             dateTimePicker1.Checked = false;
@@ -122,7 +122,7 @@ namespace MidDb26_2025CS127.UI.Froms
                 Gender = genderComboBox.SelectedIndex,
                 Designation = parsedDesignation,
                 DesignationLabel = designationText,
-                Salary = decimal.TryParse(textBox1.Text.Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
+                Salary = decimal.TryParse(salaryTextBox.Text.Trim(), out parsedSalary) ? (decimal?)parsedSalary : null
             };
         }
 

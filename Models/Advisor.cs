@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MidDb26_2025CS127.Models
 {
-    internal class Advisor : Person
+    public class Advisor : Person
     {
         public int AdvisorId { get; set; }
         public int Designation { get; set; }     
