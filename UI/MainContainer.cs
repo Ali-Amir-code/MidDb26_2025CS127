@@ -94,12 +94,12 @@ namespace MidDb26_2025CS127.UI
 
         private void Sidebar_AdvisoryClicked(object sender, EventArgs e)
         {
-            LoadControl(new AdvisoryControl());
+            LoadControl(new AdvisoryControl(AdvisorBL.GetAllAdvisors()));
         }
 
         private void Sidebar_ProjectsClicked(object sender, EventArgs e)
         {
-            LoadControl(new ProjectControl());
+            LoadControl(new ProjectControl(ProjectBL.GetAllProjects()));
         }
 
         private void Sidebar_GroupsClicked(object sender, EventArgs e)

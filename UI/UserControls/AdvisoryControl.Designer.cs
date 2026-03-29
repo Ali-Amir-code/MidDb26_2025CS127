@@ -48,7 +48,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
             this.clearBtn = new System.Windows.Forms.Button();
             this.selectBtn = new System.Windows.Forms.Button();
@@ -291,7 +291,7 @@
             this.formPanel.Controls.Add(this.dateTimePicker1);
             this.formPanel.Controls.Add(this.textBox1);
             this.formPanel.Controls.Add(this.salaryLabel);
-            this.formPanel.Controls.Add(this.textBox2);
+            this.formPanel.Controls.Add(this.designationComboBox);
             this.formPanel.Controls.Add(this.designationLabel);
             this.formPanel.Controls.Add(this.clearBtn);
             this.formPanel.Controls.Add(this.selectBtn);
@@ -340,12 +340,16 @@
             this.salaryLabel.TabIndex = 20;
             this.salaryLabel.Text = "SALARY";
             // 
-            // textBox2
+            // designationComboBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(11, 150);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(225, 22);
-            this.textBox2.TabIndex = 19;
+            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.designationComboBox.FormattingEnabled = true;
+            this.designationComboBox.Location = new System.Drawing.Point(11, 150);
+            this.designationComboBox.MaxDropDownItems = 12;
+            this.designationComboBox.Name = "designationComboBox";
+            this.designationComboBox.Size = new System.Drawing.Size(225, 24);
+            this.designationComboBox.TabIndex = 19;
             // 
             // designationLabel
             // 
@@ -663,7 +667,7 @@
         private System.Windows.Forms.DataGridView advisorListGrid;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label salaryLabel;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox designationComboBox;
         private System.Windows.Forms.Label designationLabel;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
