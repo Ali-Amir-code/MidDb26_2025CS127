@@ -11,5 +11,6 @@ namespace MidDb26_2025CS127.Models
         public int AdvisorId { get; set; }
         public int Designation { get; set; }     
         public decimal? Salary { get; set; }
+        public string DesignationLabel { get; set; }
     }
 }
