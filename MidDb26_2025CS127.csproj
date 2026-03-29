@@ -108,6 +108,7 @@
     <Compile Include="DAL\GroupDAL.cs" />
     <Compile Include="DAL\ProjectDAL.cs" />
     <Compile Include="DAL\StudentDAL.cs" />
+    <Compile Include="MidDb26_2025CS127.Models\Group.cs" />
     <Compile Include="Models\Advisor.cs" />
     <Compile Include="Models\Evaluation.cs" />
     <Compile Include="Models\EvaluationMarkRow.cs" />

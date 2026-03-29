@@ -13,6 +13,8 @@ namespace MidDb26_2025CS127.BL
 
         public static List<Advisor> GetAdvisorOptions() => ProjectDAL.GetAdvisorOptions();
 
+        public static List<Lookup> GetAdvisorRoleOptions() => ProjectDAL.GetAdvisorRoleOptions();
+
         public static bool SaveProject(Project project, bool isUpdate, out string errorMessage)
         {
             errorMessage = GetErrorMessage(project);
@@ -36,7 +38,7 @@ namespace MidDb26_2025CS127.BL
                 projectId = ProjectDAL.AddProject(project);
             }
 
-            ProjectDAL.SaveProjectAdvisors(projectId, project);
+            ProjectDAL.SaveProjectAdvisor(projectId, project.AdvisorId, project.AdvisorRoleId);
             return true;
         }
 

@@ -6,6 +6,7 @@ namespace MidDb26_2025CS127.BL
 {
     internal class EvaluationBL
     {
+        public static List<Lookup> GetEvaluationTypes() => EvaluationDAL.GetEvaluationTypes();
         public static List<Evaluation> GetAllEvaluations() => EvaluationDAL.GetAllEvaluations();
         public static List<EvaluationMarkRow> GetEvaluationMarkRows(int evaluationId) => EvaluationDAL.GetEvaluationMarkRows(evaluationId);
 

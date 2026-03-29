@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MidDb26_2025CS127.Models
 {
-    internal class Project
+    public class Project
     {
         public int Id { get; set; }
         public string Description { get; set; }

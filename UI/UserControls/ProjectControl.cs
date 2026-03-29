@@ -4,7 +4,6 @@ using MidDb26_2025CS127.UI.Froms;
 using MidDb26_2025CS127.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -173,6 +172,31 @@ namespace MidDb26_2025CS127.UI.UserControls
                 form.projectAdded += Form_projectAdded;
                 form.ShowDialog();
             }
+        }
+
+        private void coAdvisorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void mainAdvisorLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descriptionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainAdvisorComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

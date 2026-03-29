@@ -92,6 +92,30 @@ namespace MidDb26_2025CS127.DAL
             return advisors;
         }
 
+        public static List<Lookup> GetAdvisorRoleOptions()
+        {
+            var roles = new List<Lookup>();
+            const string query = @"SELECT Id, Value, Category
+                                   FROM lookup
+                                   WHERE UPPER(Category) LIKE '%ADVISOR%ROLE%'
+                                   ORDER BY Value;";
+
+            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
+            {
+                while (reader.Read())
+                {
+                    roles.Add(new Lookup
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Value = Convert.ToString(reader["Value"]),
+                        Category = Convert.ToString(reader["Category"])
+                    });
+                }
+            }
+
+            return roles;
+        }
+
         public static int AddProject(Project project)
         {
             using (var connection = DatabaseHelper.GetConnection())

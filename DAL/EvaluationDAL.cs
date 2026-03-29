@@ -7,6 +7,32 @@ namespace MidDb26_2025CS127.DAL
 {
     internal class EvaluationDAL
     {
+        public static List<Lookup> GetEvaluationTypes()
+        {
+            EnsureEvaluationTypes();
+
+            var list = new List<Lookup>();
+            const string query = @"SELECT Id, Value, Category
+                                   FROM lookup
+                                   WHERE UPPER(Category) LIKE '%EVALUATION%TYPE%'
+                                   ORDER BY Value;";
+
+            using (var reader = DatabaseHelper.GetData(query, new Dictionary<string, object>()))
+            {
+                while (reader.Read())
+                {
+                    list.Add(new Lookup
+                    {
+                        Id = Convert.ToInt32(reader["Id"]),
+                        Value = Convert.ToString(reader["Value"]),
+                        Category = Convert.ToString(reader["Category"])
+                    });
+                }
+            }
+
+            return list;
+        }
+
         public static List<Evaluation> GetAllEvaluations()
         {
             var list = new List<Evaluation>();

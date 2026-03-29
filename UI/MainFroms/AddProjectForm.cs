@@ -156,6 +156,125 @@ namespace MidDb26_2025CS127.UI.Froms
 
         private void SaveProject(bool isUpdate)
         {
+        }
+
+        private void SetupForm()
+        {
+            BuildAdvisorControls();
+            LoadAdvisorData();
+            addBtn.Click += addBtn_Click;
+            clearBtn.Click += clearBtn_Click;
+        }
+
+        private void BuildAdvisorControls()
+        {
+            advisorComboBox = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                FlatStyle = FlatStyle.Popup,
+                Location = new Point(168, 210),
+                Size = new Size(227, 24)
+            };
+            advisorRoleComboBox = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                FlatStyle = FlatStyle.Popup,
+                Location = new Point(168, 245),
+                Size = new Size(227, 24)
+            };
+
+            var advisorLabel = new Label
+            {
+                Text = "ADVISOR:",
+                Location = new Point(98, 210),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold)
+            };
+            var roleLabel = new Label
+            {
+                Text = "ADVISOR ROLE:",
+                Location = new Point(53, 245),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold)
+            };
+
+            mainPanel.Controls.Add(advisorLabel);
+            mainPanel.Controls.Add(roleLabel);
+            mainPanel.Controls.Add(advisorComboBox);
+            mainPanel.Controls.Add(advisorRoleComboBox);
+        }
+
+        private void LoadAdvisorData()
+        {
+            advisors = ProjectBL.GetAdvisorOptions();
+            advisorComboBox.Items.Clear();
+            advisorComboBox.Items.Add("None");
+            foreach (var advisor in advisors)
+            {
+                advisorComboBox.Items.Add($"{advisor.FirstName} {advisor.LastName}".Trim());
+            }
+            advisorComboBox.SelectedIndex = 0;
+
+            advisorRoles = ProjectBL.GetAdvisorRoleOptions();
+            advisorRoleComboBox.Items.Clear();
+            advisorRoleComboBox.Items.Add("Default");
+            foreach (var role in advisorRoles) advisorRoleComboBox.Items.Add(role.Value);
+            advisorRoleComboBox.SelectedIndex = 0;
+        }
+
+        private void SelectAdvisor(int? advisorId)
+        {
+            if (!advisorId.HasValue)
+            {
+                advisorComboBox.SelectedIndex = 0;
+                return;
+            }
+
+            int index = advisors.FindIndex(a => a.Id == advisorId.Value);
+            advisorComboBox.SelectedIndex = index >= 0 ? index + 1 : 0;
+        }
+
+        private void SelectAdvisorRole(int? roleId)
+        {
+            if (!roleId.HasValue)
+            {
+                advisorRoleComboBox.SelectedIndex = 0;
+                return;
+            }
+
+            int index = advisorRoles.FindIndex(r => r.Id == roleId.Value);
+            advisorRoleComboBox.SelectedIndex = index >= 0 ? index + 1 : 0;
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            regNoTextBox.Text = string.Empty;
+            firstNameTextBox.Text = string.Empty;
+            advisorComboBox.SelectedIndex = 0;
+            advisorRoleComboBox.SelectedIndex = 0;
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            SaveProject(currentMode == FormMode.Update);
+        }
+
+        private Project BuildProjectFromForm()
+        {
+            int advisorIndex = advisorComboBox.SelectedIndex - 1;
+            int roleIndex = advisorRoleComboBox.SelectedIndex - 1;
+            return new Project
+            {
+                Id = editingProjectId,
+                Title = regNoTextBox.Text,
+                Description = firstNameTextBox.Text,
+                AdvisorId = advisorIndex >= 0 && advisorIndex < advisors.Count ? (int?)advisors[advisorIndex].Id : null,
+                AdvisorRoleId = roleIndex >= 0 && roleIndex < advisorRoles.Count ? (int?)advisorRoles[roleIndex].Id : null
+            };
+        }
+
+        private void SaveProject(bool isUpdate)
+        {
             ApplicationStatusService.PublishInfo(isUpdate ? "Updating project record..." : "Adding project record...");
             var project = BuildProjectFromForm();
 

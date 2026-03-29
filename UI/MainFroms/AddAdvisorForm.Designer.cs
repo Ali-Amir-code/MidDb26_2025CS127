@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddAdvisorForm));
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.salaryLabel = new System.Windows.Forms.Label();
             this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.designationLabel = new System.Windows.Forms.Label();
@@ -51,12 +51,13 @@
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
+            this.designationComboBox = new System.Windows.Forms.ComboBox();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.textBox1);
+            this.mainPanel.Controls.Add(this.salaryTextBox);
             this.mainPanel.Controls.Add(this.salaryLabel);
             this.mainPanel.Controls.Add(this.designationComboBox);
             this.mainPanel.Controls.Add(this.designationLabel);
@@ -83,14 +84,14 @@
             this.mainPanel.Size = new System.Drawing.Size(582, 603);
             this.mainPanel.TabIndex = 0;
             // 
-            // textBox1
+            // salaryTextBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(168, 242);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(225, 24);
-            this.textBox1.TabIndex = 59;
-            this.textBox1.Tag = "";
+            this.salaryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.salaryTextBox.Location = new System.Drawing.Point(168, 242);
+            this.salaryTextBox.Name = "salaryTextBox";
+            this.salaryTextBox.Size = new System.Drawing.Size(225, 24);
+            this.salaryTextBox.TabIndex = 59;
+            this.salaryTextBox.Tag = "";
             // 
             // salaryLabel
             // 
@@ -122,9 +123,9 @@
             this.designationLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.designationLabel.Location = new System.Drawing.Point(98, 163);
             this.designationLabel.Name = "designationLabel";
-            this.designationLabel.Size = new System.Drawing.Size(129, 23);
+            this.designationLabel.Size = new System.Drawing.Size(137, 23);
             this.designationLabel.TabIndex = 56;
-            this.designationLabel.Text = "DESIGNATION:";
+            this.designationLabel.Text = "DESIGNATION*:";
             // 
             // bottomLine
             // 
@@ -228,9 +229,9 @@
             this.emailLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.emailLabel.Location = new System.Drawing.Point(98, 318);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(66, 23);
+            this.emailLabel.Size = new System.Drawing.Size(72, 23);
             this.emailLabel.TabIndex = 46;
-            this.emailLabel.Text = "EMAIL:";
+            this.emailLabel.Text = "EMAIL*:";
             // 
             // contactTextBox
             // 
@@ -287,9 +288,9 @@
             this.firstNameLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.firstNameLabel.Location = new System.Drawing.Point(98, 57);
             this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(115, 23);
+            this.firstNameLabel.Size = new System.Drawing.Size(123, 23);
             this.firstNameLabel.TabIndex = 40;
-            this.firstNameLabel.Text = "FIRST NAME:";
+            this.firstNameLabel.Text = "FIRST NAME*:";
             // 
             // titleLabel
             // 
@@ -301,6 +302,25 @@
             this.titleLabel.Size = new System.Drawing.Size(210, 45);
             this.titleLabel.TabIndex = 37;
             this.titleLabel.Text = "Add Advisor";
+            // 
+            // designationComboBox
+            // 
+            this.designationComboBox.BackColor = System.Drawing.Color.White;
+            this.designationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.designationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.designationComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.designationComboBox.FormattingEnabled = true;
+            this.designationComboBox.Items.AddRange(new object[] {
+            "Professor",
+            "Associate Professor",
+            "Assistant Professor",
+            "Lecturer",
+            "Industry Professional"});
+            this.designationComboBox.Location = new System.Drawing.Point(168, 189);
+            this.designationComboBox.MaxDropDownItems = 12;
+            this.designationComboBox.Name = "designationComboBox";
+            this.designationComboBox.Size = new System.Drawing.Size(225, 26);
+            this.designationComboBox.TabIndex = 60;
             // 
             // AddAdvisorForm
             // 
@@ -340,7 +360,7 @@
         private System.Windows.Forms.TextBox firstNameTextBox;
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label salaryLabel;
         private System.Windows.Forms.ComboBox designationComboBox;
         private System.Windows.Forms.Label designationLabel;
